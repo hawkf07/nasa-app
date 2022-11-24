@@ -5,9 +5,14 @@ interface useSearchStoreType {
   setInputValue: (e: ChangeEvent<HTMLInputElement>) => void;
   fetchNasaApi: (q: string) => Promise<void>;
   apiData: any[];
+  setClearInputValue: () => void;
+  inputIsFocus: boolean;
+  setInputIsFocus: (val: boolean) => void;
 }
 export const useSearchStore = create<useSearchStoreType>((set, get) => ({
   inputValue: "",
+  inputIsFocus: false,
+  setInputIsFocus: (val: boolean) => set({ inputIsFocus: val }),
   apiData: [],
   setInputValue(e: ChangeEvent<HTMLInputElement>) {
     const { inputValue } = get();
@@ -29,4 +34,5 @@ export const useSearchStore = create<useSearchStoreType>((set, get) => ({
       console.log(error);
     }
   },
+  setClearInputValue: () => set({ inputValue: "" }),
 }));
