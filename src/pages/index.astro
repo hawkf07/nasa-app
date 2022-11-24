@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { Navbar } from "../components/Navbar";
+import { Header } from "../components/Header";
+import { SearchInput } from "../components/Search";
+import { Form } from "../components/Form";
+---
+
+<Layout title="Welcome to Astro.">
+  <main class="container p-5 mobile:max-w-sm">
+    <Navbar />
+    <Header
+      title="A Web App for searching NASA Images API"
+      description="Just as the title said this web app can search NASA images api"
+    />
+    <Form client:visible />
+  </main>
+</Layout>
