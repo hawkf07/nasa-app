@@ -23,7 +23,7 @@ export const Form: FC<Form> = ({ ...rest }) => {
   } = useSearchStore();
   return (
     <form
-      className={clsx("flex flex-col gap-3")}
+      className={clsx("flex flex-col gap-3 lg:place-items-center container")}
       
       onSubmit={(e) => {
         submitHandler(e)
