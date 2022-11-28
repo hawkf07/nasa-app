@@ -1,10 +1,18 @@
 import clsx from "clsx";
+import { FC, FormHTMLAttributes, HTMLAttributes } from "react";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { useSearchStore } from "../store/SearchStore";
+import { getApiDataFromNasaApiBySearch } from "../utils/api";
 import { submitHandler } from "../utils/functions/submitHandler";
 import { Button } from "./Button";
+import { QueryWrapper } from "./QueryWrapper";
 import { SearchInput } from "./Search";
 
-export const Form = () => {
+interface Form extends FormHTMLAttributes<HTMLFormElement> {}
+
+const queryClient = new QueryClient();
+
+export const Form: FC<Form> = ({ ...rest }) => {
   const {
     fetchNasaApi,
     inputValue,
@@ -13,11 +21,14 @@ export const Form = () => {
     setClearInputValue,
     setInputValue,
   } = useSearchStore();
-
   return (
     <form
       className={clsx("flex flex-col gap-3")}
-      onSubmit={(e) => submitHandler(e)}
+      
+      onSubmit={(e) => {
+        submitHandler(e)
+      }}
+      {...rest}
     >
       <SearchInput
         value={inputValue}

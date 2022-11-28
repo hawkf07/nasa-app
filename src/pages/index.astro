@@ -5,6 +5,8 @@ import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 import { SearchInput } from "../components/Search";
 import { Form } from "../components/Form";
+import { QueryClientProvider } from "react-query";
+import { QueryWrapper } from "../components/QueryWrapper";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -13,6 +15,7 @@ import { Form } from "../components/Form";
     <Header
       title="A Web App for searching NASA Images API"
       description="Just as the title said this web app can search NASA images api"
+      
     />
     <Form client:visible />
   </main>
