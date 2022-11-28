@@ -27,6 +27,7 @@ export const Form: FC<Form> = ({ ...rest }) => {
       
       onSubmit={(e) => {
         submitHandler(e)
+        fetchNasaApi(inputValue)
       }}
       {...rest}
     >

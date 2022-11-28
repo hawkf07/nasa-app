@@ -5,18 +5,11 @@ import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 import { SearchInput } from "../components/Search";
 import { Form } from "../components/Form";
-import { QueryClientProvider } from "react-query";
-import { QueryWrapper } from "../components/QueryWrapper";
+import { MainContainer } from "../components/MainContainer";
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class="container p-5 mobile:max-w-sm flex flex-col lg:max-w-xl place-items-center mx-auto mt-10 gap-8">
-    <Navbar />
-    <Header
-      title="A Web App for searching NASA Images API"
-      description="Just as the title said this web app can search NASA images api"
-      
-    />
-    <Form client:visible />
-  </main>
+  <MainContainer client:visible>
+    
+  </MainContainer>
 </Layout>

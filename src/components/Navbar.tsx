@@ -4,7 +4,7 @@ interface NavbarType {
 
 export const Navbar = () => {
   return (
-    <nav className="container w-full  justify-around items-center flex ">
+    <nav className="container w-full  justify-around items-center flex  ">
       <header>
         <a href="/">LOGO</a>
       </header>
