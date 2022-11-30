@@ -1,65 +1,38 @@
-import React, { FC } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 
-interface PaginationType {
+interface Pagination {
   currentPage: number;
-  pageSize: number;
-  totalCount: number;
-  siblingCount: number;
-  paginationRange: any[];
-  onPageChange: (n: number) => void;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  postsPerPage: number;
+  setPostsPerPage: Dispatch<SetStateAction<number>>;
+  totalPosts: number;
 }
-import { usePagination, DOTS } from "../utils/hooks/usePagination";
-const Pagination: FC<PaginationType> = (props) => {
-  const {
-    onPageChange,
-    totalCount,
-    siblingCount = 1,
-    currentPage,
-    pageSize,
-  } = props;
 
-  const paginationRange = usePagination({
-    currentPage,
-    totalCount,
-    siblingCount,
-    pageSize,
-  });
+export const Pagination: FC<Pagination> = ({
+  currentPage,
+  setCurrentPage,
+  setPostsPerPage,
+  totalPosts,
+  postsPerPage,
+}) => {
+  let pages = [];
 
-  // If there are less than 2 times in pagination range we shall not render the component
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null;
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pages.push(i);
   }
 
-  const onNext = () => {
-    onPageChange(currentPage + 1);
-  };
-
-  const onPrevious = () => {
-    onPageChange(currentPage - 1);
-  };
-
-  let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul>
-      {/* Left navigation arrow */}
-      <li onClick={onPrevious}>
-        <div className="arrow left" />
-      </li>
-      {paginationRange.map((pageNumber) => {
-        // If the pageItem is a DOT, render the DOTS unicode character
-        if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
-        }
-
-        // Render our Page Pills
-        return <li onClick={() => onPageChange(pageNumber)}>{pageNumber}</li>;
+    <div className=" ">
+      {pages?.map((page, index) => {
+        return (
+          <button
+            onClick={() => setCurrentPage(page)}
+            className="mx-3 p-3 bg-blue-600 "
+          >
+            {page}
+          </button>
+        );
       })}
-      {/*  Right Navigation arrow */}
-      <li onClick={onNext}>
-        <div className="arrow right" />
-      </li>
-    </ul>
+    </div>
   );
 };
-
-export default Pagination;

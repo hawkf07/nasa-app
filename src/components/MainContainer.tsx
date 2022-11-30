@@ -6,29 +6,26 @@ import { CardContainer } from "./CardContainer";
 import { Form } from "./Form";
 import { Header } from "./Header";
 import { Navbar } from "./Navbar";
-import { usePagination } from "../utils/hooks/usePagination";
-import Pagination from "./Pagination";
+import { Pagination } from "./Pagination";
 
 export interface MainContainer {
   children: ReactNode;
-  currentPage:any[];
-  totalCount:number;
-  siblingCount:number;
+  currentPage: any[];
+  totalCount: number;
+  siblingCount: number;
 }
-
-class User extends React.Component {
-  constructor() {
-    super({ props: { name: "hello world" } });
-    this.state = {};
-  }
-
-  render() {
-    return <h1>Hello {this.props.name}</h1>;
-  }
-}
-
 export const MainContainer: FC<MainContainer> = (props) => {
-  const { apiData,paginatedApiData } = useSearchStore();
+  const { apiData, paginatedApiData } = useSearchStore();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentData = apiData?.collection.items.slice(
+    firstPostIndex,
+    lastPostIndex
+  );
+
   const formatDate = (date: string) => new Date(date).toLocaleDateString();
   return (
     <>
@@ -42,18 +39,22 @@ export const MainContainer: FC<MainContainer> = (props) => {
 
         <Form />
         {JSON.stringify(paginatedApiData)}
-        <User />
         <CardContainer>
-          {apiData?.collection.items.map((item) => {
+          {currentData?.map((item) => {
             return item.data.map((value) => {
               return (
                 <Card {...value} key={Math.floor(Math.random() * 32 ** 2)} />
               );
             });
           })}
-          
         </CardContainer>
-        <Pagination  currentPage={1} onPageChange={} />
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPosts={apiData?.collection.items.length}
+          postsPerPage={ postsPerPage}
+          setPostsPerPage={setPostsPerPage}
+        />
       </main>
     </>
   );
