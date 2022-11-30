@@ -25,7 +25,7 @@ export const SearchInput: FC<Search> = ({
   return (
     <div
       className={clsx(
-        "w-full dark:text-gray-200 rounded-md dark:bg-gray-600/75 flex justify-evenly",
+        "w-full text-gray-200 rounded-md bg-gray-600/75 flex justify-evenly",
         inputIsFocus ? "outline-1 outline rounded outline-gray-200/80" : ""
       )}
     >
