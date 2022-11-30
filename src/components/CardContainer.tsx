@@ -6,7 +6,7 @@ export interface CardContainerType extends HTMLAttributes<HTMLDivElement> {
 
 export const CardContainer: FC<CardContainerType> = ({ children, ...rest }) => {
   return (
-    <div className="grid gap-5   " {...rest}>
+    <div className="grid gap-5  min-w-full w-full  " {...rest}>
       {children}
     </div>
   );
