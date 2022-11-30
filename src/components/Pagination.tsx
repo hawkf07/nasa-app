@@ -22,12 +22,13 @@ export const Pagination: FC<Pagination> = ({
   }
 
   return (
-    <div className=" ">
+    <div className="flex flex-wrap gap-3  ">
       {pages?.map((page, index) => {
         return (
           <button
             onClick={() => setCurrentPage(page)}
-            className="mx-3 p-3 bg-blue-600 "
+            key={index}
+            className="p-2 bg-blue-600 rounded"
           >
             {page}
           </button>
