@@ -15,7 +15,7 @@ export interface MainContainer {
   siblingCount: number;
 }
 export const MainContainer: FC<MainContainer> = (props) => {
-  const { apiData, paginatedApiData } = useSearchStore();
+  const { apiData, paginatedApiData,inputValue } = useSearchStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
 
@@ -26,7 +26,6 @@ export const MainContainer: FC<MainContainer> = (props) => {
     lastPostIndex
   );
 
-  const formatDate = (date: string) => new Date(date).toLocaleDateString();
   return (
     <>
       <main className="container p-5 mobile:max-w-sm flex flex-col lg:max-w-xl place-items-center mx-auto mt-10 gap-8">
@@ -38,15 +37,15 @@ export const MainContainer: FC<MainContainer> = (props) => {
         {props.children}
 
         <Form />
-        {JSON.stringify(paginatedApiData)}
         <CardContainer>
-          {currentData?.map((item) => {
+          {currentData?.length > 0 ? currentData?.map((item) => {
             return item.data.map((value) => {
               return (
                 <Card {...value} key={Math.floor(Math.random() * 32 ** 2)} />
               );
             });
-          })}
+          }) : null}
+          {currentData?.length === 0 && "There is no data" }
         </CardContainer>
         <Pagination
           currentPage={currentPage}

@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { FC, FormHTMLAttributes, HTMLAttributes } from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { useSearchStore } from "../store/SearchStore";
 import { getApiDataFromNasaApiBySearch } from "../utils/api";
 import { submitHandler } from "../utils/functions/submitHandler";
@@ -10,7 +9,6 @@ import { SearchInput } from "./Search";
 
 interface Form extends FormHTMLAttributes<HTMLFormElement> {}
 
-const queryClient = new QueryClient();
 
 export const Form: FC<Form> = ({ ...rest }) => {
   const {
