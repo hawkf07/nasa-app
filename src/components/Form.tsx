@@ -23,13 +23,13 @@ export const Form: FC<Form> = ({ ...rest }) => {
   } = useSearchStore();
   return (
     <form
-      className={clsx("flex flex-col gap-3 lg:place-items-center container")}
-      
-      onSubmit={(e) => {
+
+      className={clsx("flex flex-col gap-3 lg:place-items-center container")} 
+      onSubmit={async (e) => {
         submitHandler(e)
-        fetchNasaApi(inputValue)
+        await fetchNasaApi(inputValue)
       }}
-      {...rest}
+      
     >
       <SearchInput
         value={inputValue}

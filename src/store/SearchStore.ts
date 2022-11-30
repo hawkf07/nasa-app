@@ -1,19 +1,25 @@
 import React, { ChangeEvent, EventHandler } from "react";
 import create from "zustand";
+import { apiData } from "../utils/types";
+
+
 interface useSearchStoreType {
+
   inputValue: string;
   setInputValue: (e: ChangeEvent<HTMLInputElement>) => void;
   fetchNasaApi: (q: string) => Promise<void>;
-  apiData: any[];
+  apiData: apiData | null;
   setClearInputValue: () => void;
   inputIsFocus: boolean;
   setInputIsFocus: (val: boolean) => void;
+  paginateApiData:(array : Array<any>,start_page : number,end_page : number) => void;
+  paginatedApiData:Array<any>;
 }
 export const useSearchStore = create<useSearchStoreType>((set, get) => ({
   inputValue: "",
   inputIsFocus: false,
   setInputIsFocus: (val: boolean) => set({ inputIsFocus: val }),
-  apiData: [],
+  apiData: null,
   setInputValue(e: ChangeEvent<HTMLInputElement>) {
     const { inputValue } = get();
     console.log(inputValue);
@@ -35,4 +41,12 @@ export const useSearchStore = create<useSearchStoreType>((set, get) => ({
     }
   },
   setClearInputValue: () => set({ inputValue: "" }),
+  paginateApiData: (array,page_number,page_size) => {
+   const {apiData} = get() 
+   
+   if (apiData !== null) {
+    return set({paginatedApiData:array.slice((page_number - 1) * page_size, page_number * page_size)})
+   }
+  },
+  paginatedApiData:[],
 }));

@@ -45,6 +45,7 @@ export const SearchInput: FC<Search> = ({
       <button
         className="bg-gray-700  rounded h-10 p-2"
         onClick={() => fetchNasaApi(value)}
+        type="submit"
       >
         <Icon icon={"fa:search"} />
       </button>
