@@ -25,6 +25,7 @@ export const Card: FC<CardType> = ({
     <div
       key={nasa_id}
       className="flex flex-col rounded p-3 border border-gray-600 hover:border-2"
+      
       {...rest}
     >
       <article className="flex flex-col   gap-3 place-items-center">
