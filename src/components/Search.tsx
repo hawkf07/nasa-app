@@ -32,14 +32,13 @@ export const SearchInput: FC<Search> = ({
       <input
         onFocus={() => setInputIsFocus(true)}
         onBlur={() => setInputIsFocus(false)}
-        className="bg-transparent p-1 focus:outline-none w-[90%]"
+        className="bg-transparent p-2 focus:outline-none w-[90%]"
         value={value}
         {...rest}
       />
-      <button onClick={() => setClearInputValue()} className="p-2 h-10 w-8">
+      <button onClick={() => setClearInputValue()} className={clsx("p-2 h-10 w-8",value.length > 0 ? "": "hidden")}>
         <Icon
           icon={"fa6-solid:xmark"}
-          className={clsx(value.length > 0 ? "min-w-8" : "hidden")}
         />
       </button>
       <button

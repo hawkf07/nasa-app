@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { dateFormatter } from "../utils/functions/dateFormatter";
 export interface CardType extends React.HTMLAttributes<HTMLDivElement> {
   center: string;
   title: string;
@@ -23,7 +24,8 @@ export const Card: FC<CardType> = ({
   return (
     <div
       key={nasa_id}
-      className="flex flex-col rounded p-3 bg-gray-200/20"
+      className="flex flex-col rounded p-3 border border-gray-600 hover:border-2"
+      
       {...rest}
     >
       <article className="flex flex-col   gap-3 place-items-center">
@@ -32,7 +34,7 @@ export const Card: FC<CardType> = ({
           <p>{center}</p>
         </header>
         <div className="flex flex-col gap-3 place-items-center">
-          <p>{date_created}</p>
+          <p>{dateFormatter(date_created)}</p>
           <a
             className="bg-blue-600 w-2/4 rounded py-1  px-3 "
             href={"something"}
